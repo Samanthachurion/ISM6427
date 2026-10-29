@@ -96,4 +96,23 @@ $("search").addEventListener("submit", async (e) => {
   }
 });
 
+// Greeting based on time of day
+const NAME = "Sami";
+const h = new Date().getHours();
+const part = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+$("greeting").textContent = `${part}, ${NAME}`;
+
+// Theme switcher: light / dark / system (saved in the browser)
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document.querySelectorAll(".themes button").forEach((b) =>
+    b.classList.toggle("active", b.dataset.theme === theme)
+  );
+  try { localStorage.setItem("theme", theme); } catch {}
+}
+document.querySelectorAll(".themes button").forEach((b) =>
+  b.addEventListener("click", () => setTheme(b.dataset.theme))
+);
+setTheme(document.documentElement.dataset.theme || "system");
+
 loadWeather(DEFAULT);

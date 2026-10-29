@@ -5,11 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    // Apply the saved theme before the page draws, so there's no flash
+    try { document.documentElement.dataset.theme = localStorage.getItem("theme") || "system"; }
+    catch { document.documentElement.dataset.theme = "system"; }
+  </script>
 </head>
 <body>
   <div class="bg"></div>
 
   <main class="app">
+    <header class="top">
+      <div id="greeting" class="greeting">Hello, Sami</div>
+      <div class="glass themes" role="group" aria-label="Theme">
+        <button data-theme="light">Light</button>
+        <button data-theme="dark">Dark</button>
+        <button data-theme="system">System</button>
+      </div>
+    </header>
+
     <form id="search" class="glass search">
       <input id="city" type="text" placeholder="Search city" autocomplete="off" />
       <button type="submit" aria-label="Search">⌕</button>
